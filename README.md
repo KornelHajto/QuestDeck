@@ -1,0 +1,3 @@
+# QuestDeck
+
+A CLI-based automation tool for managing game downloads via torrents. It scrapes selected sources for game entries, fetches the corresponding .torrent files, and — if configured — sends them directly to a running qBittorrent instance using its Web API. Otherwise, it stores the .torrent files locally for manual use. Designed to be fast, minimal, and highly scriptable, this tool simplifies the process of tracking and fetching new game repacks
