@@ -1,4 +1,3 @@
-from .config import Config
 import os
 import time
 from selenium import webdriver
@@ -9,7 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import requests
 from bs4 import BeautifulSoup
-from .qbittorrent_client import QBittorrentClient
+from tools.config.loader import Config
+from tools.qbittorrent.client import QBittorrentClient
 
 config = Config()
 

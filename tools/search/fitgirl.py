@@ -1,11 +1,14 @@
-import requests
+import httpx
 from bs4 import BeautifulSoup
 
-def search_fitgirl(query):
+async def search_fitgirl(query):
     base_url = "https://fitgirl-repacks.site/?s="
     search_url = base_url + query.replace(" ", "+")
 
-    response = requests.get(search_url)
+    print(f"Searching FitGirl for: {query}")
+    async with httpx.AsyncClient() as client:
+        response = await client.get(search_url)
+
     if response.status_code != 200:
         print("Failed to retrieve search results")
         return []

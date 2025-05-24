@@ -1,4 +1,5 @@
-from tools.cli import main
+import asyncio
+from tools.cli.main import run_cli
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(run_cli())
