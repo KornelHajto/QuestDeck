@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import requests
 from bs4 import BeautifulSoup
+from .qbittorrent_client import QBittorrentClient
 
 config = Config()
 
@@ -36,6 +37,8 @@ def download_torrent_with_selenium(paste_url):
     download_dir = config.get('torrent_save_dir', os.path.join(os.path.expanduser('~'), 'Downloads'))
     os.makedirs(download_dir, exist_ok=True)
 
+    existing_torrents = set(f for f in os.listdir(download_dir) if f.endswith('.torrent'))
+    
     options = Options()
     options.add_argument("-headless")
     
@@ -99,10 +102,41 @@ def download_torrent_with_selenium(paste_url):
         print("Browser closed")
         
         try:
-            torrent_files = [f for f in os.listdir(download_dir) if f.endswith('.torrent')]
-            if torrent_files:
-                print(f"Success! Downloaded torrent file(s): {', '.join(torrent_files)}")
+            current_torrents = set(f for f in os.listdir(download_dir) if f.endswith('.torrent'))
+            
+            new_torrents = current_torrents - existing_torrents
+            
+            if new_torrents:
+                print(f"Success! Downloaded new torrent file(s): {', '.join(new_torrents)}")
+                
+                for torrent_file in new_torrents:
+                    torrent_path = os.path.join(download_dir, torrent_file)
+                    process_torrent_file(torrent_path)
             else:
-                print("No .torrent files found in the download directory. Download may have failed.")
+                print("No new .torrent files found in the download directory. Download may have failed.")
         except Exception as verify_e:
             print(f"Error verifying downloads: {verify_e}")
+
+def process_torrent_file(torrent_file_path):
+    mode = config.get('mode')
+    success = True
+    
+    if mode in ['local', 'both']:
+        print(f"Torrent file saved locally at: {torrent_file_path}")
+    
+    if mode in ['qbittorrent', 'both']:
+        print("Attempting to add torrent to qBittorrent...")
+        qbt_client = QBittorrentClient(config)
+        
+        if qbt_client.authenticate():
+            print("Authentication successful, attempting to add torrent...")
+            if qbt_client.add_torrent(torrent_file_path):
+                print("Successfully added torrent to qBittorrent")
+            else:
+                print("Failed to add torrent to qBittorrent")
+                success = False
+        else:
+            print("Failed to authenticate with qBittorrent server. Please check your credentials.")
+            success = False
+    
+    return success

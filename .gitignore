@@ -170,3 +170,8 @@ cython_debug/
 debug_screenshot.png
 geckodriver.log
 torrentsd/
+
+# Ignore configuration file but keep the example
+config.yaml
+# Don't ignore the example configuration
+!config.yaml.example
