@@ -1,0 +1,6 @@
+torrent_save_dir: ./torrents
+qbittorrent_host: http://localhost
+qbittorrent_port: 8080
+qbittorrent_username: admin
+qbittorrent_password: adminadmin
+mode: both

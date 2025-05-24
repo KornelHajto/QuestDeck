@@ -1,0 +1,17 @@
+# QuestDeck Configuration Example
+# Copy this file to config.yaml and update the values
+
+# Directory where torrent files will be saved (absolute or relative path)
+torrent_save_dir: ./torrents
+
+# qBittorrent Web UI connection settings
+qbittorrent_host: http://localhost
+qbittorrent_port: 8080
+qbittorrent_username: admin
+qbittorrent_password: adminadmin
+
+# Operation mode: 'local', 'qbittorrent', or 'both'
+# - local: Save torrent files locally without sending to qBittorrent
+# - qbittorrent: Send torrent files to qBittorrent without saving locally
+# - both: Save torrent files locally and send them to qBittorrent
+mode: both
