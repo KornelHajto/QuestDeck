@@ -1,4 +1,4 @@
-from tools.cli import main
+from tools.cli.main import run_cli
 
 if __name__ == "__main__":
-    main()
+    run_cli()
