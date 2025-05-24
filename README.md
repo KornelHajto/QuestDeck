@@ -56,3 +56,16 @@ A CLI-based automation tool for managing game downloads via torrents. It scrapes
 ## Usage
 
 Run the CLI tool:
+```
+python3 main.py
+```
+
+## Wiki and Documentation
+For comprehensive documentation including:
+
+
+Advanced configuration options
+Custom search providers
+API documentation
+Contribution guidelines
+Visit the QuestDeck Wiki
