@@ -65,7 +65,5 @@ For comprehensive documentation including:
 
 
 Advanced configuration options
-Custom search providers
-API documentation
 Contribution guidelines
-Visit the QuestDeck Wiki
+Visit the wiki: https://git.kornelhajto.xyz/kornelhajto/QuestDeck/wiki
